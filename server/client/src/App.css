@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Main part */
+.backgroundMain {
+  background-image: url(./img/backgroundMain.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 70vh;
+  display: flex;
+  color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 0;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.MuiCard-root {
+  margin: 1%;
+}
+
+.recipePage {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2%;
+}
+
+.filterMenu img {
+  width: 80px;
+}
+.filterMenu h4 {
+  margin: 0;
+}
