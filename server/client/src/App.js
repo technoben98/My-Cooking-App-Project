@@ -64,7 +64,7 @@ function App() {
           />
           <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/filter/:filter" element={<FilteredRecipes />} />
-          <Route path="/all" element={<AllRecipes />} />
+          <Route path="/allRecipes" element={<AllRecipes />} />
           <Route
             path="/myBooks"
             element={

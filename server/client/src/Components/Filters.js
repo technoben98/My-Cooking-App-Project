@@ -162,7 +162,7 @@ const Filters = (props) => {
         </a>
       </div>
       <div>
-        <a onClick={() => navigator("/all")}>
+        <a onClick={() => navigator("/allRecipes")}>
           <img
             src={otherImage}
             alt="all"
