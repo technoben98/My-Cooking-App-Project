@@ -35,7 +35,7 @@ export const _login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ token: accesstoken, user: username });
+    res.json({ token: accesstoken, user: username, userId: userid });
   } catch (e) {
     console.log("_login=>", e);
     res.status(404).json({ msg: "something went wrong" });
