@@ -19,21 +19,46 @@ const Nav = () => {
           <Button
             component={Link}
             to="/create"
-            sx={{ margin: "5px", whiteSpace: "nowrap" }}
+            sx={{
+              margin: "5px",
+              whiteSpace: "nowrap",
+              color: "white",
+              fontSize: "1.1em",
+            }}
           >
             Create Recipe
           </Button>
           <Button
-            sx={{ margin: "5px", whiteSpace: "nowrap" }}
+            sx={{
+              margin: "5px",
+              whiteSpace: "nowrap",
+              color: "white",
+              fontSize: "1.1em",
+            }}
             component={Link}
             to="/myBooks"
           >
             My Book
           </Button>
-          <div style={{ margin: "5px", whiteSpace: "nowrap", color: "white" }}>
+          <div
+            style={{
+              margin: "5px",
+              whiteSpace: "nowrap",
+              color: "white",
+              fontSize: "1.1em",
+            }}
+          >
             Welcome, {user}!
           </div>
-          <Button onClick={logout} sx={{ margin: "5px", whiteSpace: "nowrap" }}>
+          <Button
+            onClick={logout}
+            sx={{
+              margin: "5px",
+              whiteSpace: "nowrap",
+              color: "white",
+              fontSize: "1.1em",
+            }}
+          >
             Logout
           </Button>
         </Stack>
@@ -41,10 +66,18 @@ const Nav = () => {
     } else {
       return (
         <Stack direction={"row"}>
-          <Button component={Link} to="/login">
+          <Button
+            component={Link}
+            to="/login"
+            sx={{ color: "white", fontSize: "1.1em" }}
+          >
             Login
           </Button>
-          <Button component={Link} to="/register">
+          <Button
+            component={Link}
+            to="/register"
+            sx={{ color: "white", fontSize: "1.1em" }}
+          >
             Register
           </Button>
         </Stack>
@@ -67,11 +100,17 @@ const Nav = () => {
         boxShadow: "0px 2px 20px #487b5f",
         position: "relative",
         zIndex: 1,
+        color: "white",
       }}
     >
       <Stack spacing={2} direction={"row"} justifyContent={"space-between"}>
         <Stack direction={"row"}>
-          <Button component={Link} to="/" exact>
+          <Button
+            component={Link}
+            to="/"
+            exact
+            sx={{ color: "white", fontSize: "1.1em" }}
+          >
             Home
           </Button>
           <Search />

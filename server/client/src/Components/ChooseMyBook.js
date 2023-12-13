@@ -1,11 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { Stack } from "@mui/material";
+import MyRecipes from "./MyRecipes";
+import MyFavorites from "./MyFavourites";
 
 const ChooseMyBook = (props) => {
-  const navigate = useNavigate();
   return (
     <div>
-      <button onClick={() => navigate("/MyRecipes")}>My Recipes</button>
-      <button onClick={() => navigate("/MyFavorite")}>My Favorites</button>
+      <Stack style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+        <div style={{ width: "45%" }}>
+          <MyRecipes />
+        </div>
+
+        <div style={{ width: "5%" }}></div>
+        <div style={{ width: "45%" }}>
+          <MyFavorites />
+        </div>
+      </Stack>
     </div>
   );
 };

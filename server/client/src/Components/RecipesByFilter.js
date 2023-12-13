@@ -25,6 +25,7 @@ const RecipesByFilter = ({ selectedTag }) => {
       const filteredRecipes = selectedTag
         ? allRecipes.filter((recipe) => recipe.tags.includes(selectedTag))
         : allRecipes;
+      console.log(filteredRecipes);
 
       setRecipe(filteredRecipes);
     } catch (e) {
@@ -43,13 +44,14 @@ const RecipesByFilter = ({ selectedTag }) => {
               <div key={item.recipe_id}>
                 <Card
                   sx={{
-                    width: 350,
+                    width: 300,
                     height: 300,
                     margin: "10px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    border: "1px solid #487b5f",
                   }}
                 >
                   <CardMedia
@@ -68,7 +70,15 @@ const RecipesByFilter = ({ selectedTag }) => {
                   </CardContent>
                   <CardActions>
                     <Link to={`/recipe/${item.recipe_id}`}>
-                      <Button size="small">Learn More</Button>
+                      <Button
+                        size="small"
+                        sx={{
+                          color: "#159d15",
+                          fontSize: "1.1em",
+                        }}
+                      >
+                        Learn More
+                      </Button>
                     </Link>
                   </CardActions>
                 </Card>

@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../Auth/useAuth";
 import "../App.css";
+import { red } from "@mui/material/colors";
 
 const Recipe = (props) => {
   const { id } = useParams();
@@ -116,59 +117,156 @@ const Recipe = (props) => {
 
     if (isInFavorites) {
       return (
-        <button onClick={removeFromFavorites}>Remove from Favorites</button>
+        <button
+          style={{
+            color: "red",
+            height: "50px",
+            backgroundColor: "#ffffff00",
+            fontSize: "2em",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={removeFromFavorites}
+        >
+          Remove from Favorites
+        </button>
       );
     } else {
-      return <button onClick={addToFavorites}>Add to Favorites</button>;
+      return (
+        <button
+          style={{
+            color: "#159d15",
+            height: "50px",
+            backgroundColor: "#ffffff00",
+            fontSize: "2em",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={addToFavorites}
+        >
+          Add to Favorites
+        </button>
+      );
     }
   };
 
   return (
-    <div>
-      <h2>{currentRecipe.title}</h2>
-      {renderFavoriteButton()}
-      <div className="recipePage">
-        <div className="ingredients">
-          <h3>Ingredients</h3>
-          <div style={{ display: "flex" }}>
-            <button onClick={add}>Add</button>
-            <h4>Quantity for: {value}</h4>
-            <button onClick={minus}>Minus</button>
-          </div>
-          {transformedIngredients &&
-          typeof transformedIngredients === "object" ? (
-            Object.entries(transformedIngredients).map(
-              ([key, valueOfIngredient]) => (
-                <p key={key + valueOfIngredient}>
-                  {key}: {valueOfIngredient[0] * value} {valueOfIngredient[1]}
-                </p>
-              )
-            )
-          ) : (
-            <p>No ingredients available</p>
-          )}
-        </div>
+    <div
+      style={{
+        backgroundImage:
+          "url(https://e0.pxfuel.com/wallpapers/846/49/desktop-wallpaper-food-foods-fancy-food.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        marginTop: "-20px",
+        minHeight: "96vh",
+        fontSize: "1.2em",
+        fontWeight: "bolder",
+      }}
+    >
+      <div
+        style={{
+          paddingTop: "30px",
+          backgroundColor: "rgba(255,255,255,0.75)",
+          margin: "auto",
+          border: "1px solid black",
+          width: "60%",
+        }}
+      >
+        <h2 style={{ marginTop: "20px" }}>{currentRecipe.title}</h2>
+        {renderFavoriteButton()}
         <div
-          className={`flippable-image ${flipped ? "flipped" : ""}`}
-          style={{ minHeight: 400 }}
+          className="recipePage"
+          style={{ margin: "auto", justifyContent: "center" }}
         >
-          {flipped ? (
-            <div onClick={handleClick}>
-              {instructionsSteps &&
-                instructionsSteps.map((item, index) => {
-                  return <p key={"instructions" + index}>Step {item}</p>;
-                })}
+          <div
+            className="ingredients"
+            style={{
+              width: "30vw",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <h3>Ingredients</h3>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <button
+                onClick={add}
+                style={{
+                  fontSize: "3em",
+                  border: "none",
+                  backgroundColor: "#ffffff00",
+                  color: "#159d15",
+                  cursor: "pointer",
+                }}
+              >
+                +
+              </button>
+              <h4>Quantity for: {value}</h4>
+              <button
+                onClick={minus}
+                style={{
+                  fontSize: "3em",
+                  border: "none",
+                  backgroundColor: "#ffffff00",
+                  color: "red",
+                  cursor: "pointer",
+                }}
+              >
+                -
+              </button>
             </div>
-          ) : (
-            <div>
-              <img
-                src="https://topfood.club/en/uploads/2021-09-13-a7yuvc-proseivat-muku.jpg"
-                alt="dish"
-                className={flipped ? "flipped" : ""}
+            {transformedIngredients &&
+            typeof transformedIngredients === "object" ? (
+              Object.entries(transformedIngredients).map(
+                ([key, valueOfIngredient]) => (
+                  <p key={key + valueOfIngredient}>
+                    {key}: {valueOfIngredient[0] * value} {valueOfIngredient[1]}
+                  </p>
+                )
+              )
+            ) : (
+              <p>No ingredients available</p>
+            )}
+          </div>
+          <div
+            className={`flippable-image ${flipped ? "flipped" : ""}`}
+            style={{
+              minHeight: 600,
+              width: 600,
+              display: "flex",
+              justifyContent: "space-evenly",
+              cursor: "pointer",
+            }}
+          >
+            {flipped ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                }}
                 onClick={handleClick}
-              />
-            </div>
-          )}
+              >
+                {instructionsSteps &&
+                  instructionsSteps.map((item, index) => {
+                    return <p key={"instructions" + index}>Step {item}</p>;
+                  })}
+              </div>
+            ) : (
+              <div style={{ height: 600, width: 600, display: "flex" }}>
+                <img
+                  src={
+                    currentRecipe.img ||
+                    "https://e0.pxfuel.com/wallpapers/794/280/desktop-wallpaper-different-veggies-seamless-vector-pattern-of-hand-drawn-fresh-tasty-vegetarian-raw-food-repeat-with-cooking-fresh-tasty-organic-vegetables-for-cooking-book-menu-or-textile-fabric-print-stock-vector.jpg"
+                  }
+                  alt="dish"
+                  style={{ width: 600 }}
+                  className={flipped ? "flipped" : ""}
+                  onClick={handleClick}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

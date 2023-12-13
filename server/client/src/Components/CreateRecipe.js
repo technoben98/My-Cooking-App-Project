@@ -186,7 +186,11 @@ const CreateRecipe = (props) => {
               />
             </Stack>
           ))}
-          <Button variant="contained" onClick={handleAddIngredient}>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#1C3829" }}
+            onClick={handleAddIngredient}
+          >
             Add ingredient
           </Button>
           {instructions.map((instruction, index) => (
@@ -215,7 +219,11 @@ const CreateRecipe = (props) => {
               />
             </Stack>
           ))}
-          <Button variant="contained" onClick={handleAddInstructions}>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#1C3829" }}
+            onClick={handleAddInstructions}
+          >
             Add step
           </Button>
           <Autocomplete
@@ -249,7 +257,11 @@ const CreateRecipe = (props) => {
               />
             )}
           />
-          <Button variant="contained" onClick={handleCreateRecipe}>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#1C3829" }}
+            onClick={handleCreateRecipe}
+          >
             Create
           </Button>
         </Stack>

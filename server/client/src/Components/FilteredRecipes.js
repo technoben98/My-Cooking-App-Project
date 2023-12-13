@@ -7,7 +7,10 @@ import { filtersByCategory } from "../iternalStorage/db";
 const FilteredRecipes = (props) => {
   const { filter } = useParams();
   const [rotatedTags, setRotatedTags] = useState([]);
-  const [selectedTag, setSelectedTag] = useState(filter);
+  const [selectedTag, setSelectedTag] = useState(
+    filter.charAt(0).toUpperCase() + filter.slice(1)
+  );
+  console.log(filter);
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
@@ -21,6 +24,7 @@ const FilteredRecipes = (props) => {
   };
 
   const selectedFilters = filtersByCategory[filter] || [];
+  console.log(selectedFilters);
 
   return (
     <div>

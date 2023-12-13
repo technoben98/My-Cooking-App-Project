@@ -44,27 +44,31 @@ const MyRecipes = (props) => {
 
   return (
     <div>
-      <h2>Recipes</h2>
+      <h2>My Recipes</h2>
       <div className="cards">
         {recipe.map((item) => {
           return (
             <div key={item.recipe_id}>
               <Card
                 sx={{
-                  width: 350,
+                  width: 300,
                   height: 300,
                   margin: "10px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  border: "1px solid #487b5f",
                 }}
               >
                 <CardMedia
                   component="img"
                   alt="dish"
                   height="140"
-                  image="https://topfood.club/en/uploads/2021-09-13-a7yuvc-proseivat-muku.jpg"
+                  image={
+                    item.img ||
+                    "https://e0.pxfuel.com/wallpapers/794/280/desktop-wallpaper-different-veggies-seamless-vector-pattern-of-hand-drawn-fresh-tasty-vegetarian-raw-food-repeat-with-cooking-fresh-tasty-organic-vegetables-for-cooking-book-menu-or-textile-fabric-print-stock-vector.jpg"
+                  }
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -73,13 +77,21 @@ const MyRecipes = (props) => {
                 </CardContent>
                 <CardActions>
                   <Link to={`/recipe/${item.recipe_id}`}>
-                    <Button size="small">Learn More</Button>
+                    <Button
+                      size="small"
+                      sx={{
+                        color: "#159d15",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Learn More
+                    </Button>
                   </Link>
 
                   <Button
                     onClick={() => deleteRecipe(item.recipe_id)}
                     size="small"
-                    sx={{ color: "red" }}
+                    sx={{ color: "red", fontSize: "1.1em" }}
                   >
                     Delete
                   </Button>
