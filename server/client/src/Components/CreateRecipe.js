@@ -3,6 +3,11 @@ import { TextField, Autocomplete, Stack, Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Auth/useAuth";
+import {
+  ingredientsMeasurements,
+  tags,
+  tagsWithDependencies,
+} from "../iternalStorage/db";
 
 const CreateRecipe = (props) => {
   const [title, setTitle] = useState("");
@@ -13,105 +18,6 @@ const CreateRecipe = (props) => {
   const [selectedDependentTags, setSelectedDependentTags] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  const ingredientsMeasurements = [
-    "cups",
-    "oz",
-    "to taste",
-    "tbsp",
-    "tsp",
-    "ball",
-    "pcs",
-    "slice",
-    "lb",
-    "claw",
-  ];
-
-  const tags = [
-    "Soup",
-    "Breakfast",
-    "Main",
-    "Side",
-    "Salad",
-    "Appetizers",
-    "Bakery",
-    "Desserts",
-    "Other",
-  ];
-
-  const tagsWithDependencies = {
-    Breakfast: [
-      "Toast",
-      "Sandwich",
-      "Eggs",
-      "Overnight oats",
-      "Crepes and pancakes",
-      "Porridge",
-      "Muesli & granola",
-      "Waffles",
-      "Other",
-    ],
-    Soup: [
-      "Meat soup",
-      "Vegetable soup",
-      "Fish and seafood soup",
-      "Noodle soup",
-      "Cold soup",
-      "Cream soup",
-      "Other",
-    ],
-    Main: [
-      "Meat main dishes",
-      "Seafood main dishes",
-      "Quiche",
-      "Vegetable main dishes",
-      "Pizza",
-      "Burger",
-      "Pasta",
-      "Other",
-    ],
-    Side: [
-      "Potato side dish recipe",
-      "Rice side dish recipe",
-      "Vegetable side dish recipe",
-      "Sauces and condiments",
-      "Other",
-    ],
-    Salad: [
-      "Greek salad",
-      "Tuna salad",
-      "Vegetable salad",
-      "Meat salad",
-      "Egg salad",
-      "Grain salad",
-      "Salad dressing",
-      "Other",
-    ],
-    Appetizers: [
-      "Canapes and crostini",
-      "Bruschetta",
-      "Meat and poultry appetizer",
-      "Baked brie",
-      "Stuffed mushroom",
-      "Other",
-    ],
-    Desserts: [
-      "Cheesecake",
-      "Cobbler",
-      "Crisps and crumbles",
-      "Custards and puddings",
-      "Pie",
-      "Cake",
-      "Cupcakes",
-      "Frozen",
-      "Brownie",
-      "Cookies",
-      "Candy& chocolate",
-      "Dessert filling",
-      "Mousse",
-      "Other",
-    ],
-  };
 
   const handleAddIngredient = () => {
     setIngredients((prevIngredients) => [
@@ -212,10 +118,11 @@ const CreateRecipe = (props) => {
               key={index}
               spacing={2}
               sx={{
-                width: 500,
+                width: "100%",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "flex-end",
               }}
             >
               <TextField
@@ -234,6 +141,7 @@ const CreateRecipe = (props) => {
                     return updatedIngredients;
                   });
                 }}
+                sx={{ width: "33%" }}
               />
               <TextField
                 id={`ingredient-quantity-${index}`}
@@ -251,7 +159,7 @@ const CreateRecipe = (props) => {
                     return updatedIngredients;
                   });
                 }}
-                sx={{ width: 240 }}
+                sx={{ width: "33%" }}
               />
               <Autocomplete
                 disablePortal
@@ -259,7 +167,7 @@ const CreateRecipe = (props) => {
                 options={ingredientsMeasurements}
                 getOptionLabel={(option) => option}
                 value={ing.measurement || ""}
-                sx={{ width: 240 }}
+                sx={{ width: "33%" }}
                 renderInput={(params) => (
                   <TextField {...params} label="Measurement" />
                 )}
@@ -286,7 +194,7 @@ const CreateRecipe = (props) => {
               key={index}
               spacing={2}
               sx={{
-                width: 500,
+                width: "100%",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
