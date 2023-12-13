@@ -71,14 +71,32 @@
 .filterMenu img {
   width: 80px;
 }
-.rotatable-image {
-  transition: transform 0.7s ease;
-  cursor: pointer;
-}
 
 .rotated {
   transform: rotateY(360deg);
+  transition: transform 0.7s ease;
+  cursor: pointer;
 }
 .filterMenu h4 {
   margin: 0;
+}
+
+/* Recipe */
+
+.flippable-image {
+  width: 400px;
+  height: 400px;
+}
+
+.flippable-image img,
+.flippable-image div {
+  width: 400px;
+  height: 400px;
+  /* backface-visibility: hidden; */
+  transition: transform 2s ease;
+  transform: rotateY(180deg);
+}
+
+.flipped {
+  transform: rotateY(180deg);
 }

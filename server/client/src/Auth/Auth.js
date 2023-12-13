@@ -21,7 +21,7 @@ const Auth = (props) => {
           x_access_token: token,
         },
       });
-      console.log("responce=>", response);
+      // console.log("responce=>", response);
       if (response.status === 201) setRedirect(true);
     } catch (err) {
       console.log(err.response.data);

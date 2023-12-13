@@ -7,11 +7,12 @@ import Search from "./Search";
 import { useContext } from "react";
 
 const Nav = () => {
-  const { user } = useAuth();
+  const { user, userId } = useAuth();
   const navigate = useNavigate();
   const { setToken, updateUser } = useContext(AppContext);
   const isLogined = () => {
     console.log(user);
+    console.log(userId);
     if (user) {
       return (
         <Stack direction={"row"} alignItems={"center"}>
@@ -25,9 +26,9 @@ const Nav = () => {
           <Button
             sx={{ margin: "5px", whiteSpace: "nowrap" }}
             component={Link}
-            to="/myResipes"
+            to="/myBooks"
           >
-            My Recipes
+            My Book
           </Button>
           <div style={{ margin: "5px", whiteSpace: "nowrap", color: "white" }}>
             Welcome, {user}!
@@ -52,7 +53,7 @@ const Nav = () => {
   };
   const logout = () => {
     setToken("");
-    updateUser("");
+    updateUser("", "");
     localStorage.setItem("token", "");
     localStorage.setItem("username", "");
     navigate("/login");
@@ -68,17 +69,14 @@ const Nav = () => {
         zIndex: 1,
       }}
     >
-      <Stack spacing={2} direction={"row"} justifyContent={"space-evenly"}>
+      <Stack spacing={2} direction={"row"} justifyContent={"space-between"}>
         <Stack direction={"row"}>
           <Button component={Link} to="/" exact>
             Home
           </Button>
-          <Button component={Link} to="/recipes">
-            Recipes
-          </Button>
+          <Search />
         </Stack>
 
-        <Search />
         {isLogined()}
       </Stack>
     </div>

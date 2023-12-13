@@ -37,12 +37,14 @@ const LoginRegister = (props) => {
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("username", response.data.user);
+          localStorage.setItem("userId", response.data.userId);
           setToken(response.data.token);
-          updateUser(response.data.user);
+          updateUser(response.data.user, response.data.userId);
           setMsg("");
           navigate("/");
           console.log("token=>", response.data.token);
           console.log("username=>", response.data.user);
+          console.log("userId=>", response.data.userId);
         }
       } catch (err) {
         console.log(err);
