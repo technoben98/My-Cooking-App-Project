@@ -71,6 +71,14 @@
 .filterMenu img {
   width: 80px;
 }
+.rotatable-image {
+  transition: transform 0.7s ease;
+  cursor: pointer;
+}
+
+.rotated {
+  transform: rotateY(360deg);
+}
 .filterMenu h4 {
   margin: 0;
 }

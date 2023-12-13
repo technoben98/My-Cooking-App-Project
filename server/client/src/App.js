@@ -11,6 +11,7 @@ import Auth from "./Auth/Auth";
 import SearchResults from "./Components/SearchResult";
 import MyRecipes from "./Components/MyRecipes";
 import FilteredRecipes from "./Components/FilteredRecipes";
+import AllRecipes from "./Components/AllRecipes";
 
 export const AppContext = createContext();
 
@@ -55,6 +56,8 @@ function App() {
             element={<LoginRegister title="Register" />}
           />
           <Route path="/recipe/:id" element={<Recipe />} />
+          <Route path="/filter/:filter" element={<FilteredRecipes />} />
+          <Route path="/all" element={<AllRecipes />} />
           <Route path="/myResipes" element={<MyRecipes />} />
         </Routes>
       </div>

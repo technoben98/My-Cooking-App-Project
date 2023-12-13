@@ -3,12 +3,14 @@ import { TextField, Autocomplete, Stack, Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Auth/useAuth";
+
 const CreateRecipe = (props) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [instructions, setInstructions] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedMainTags, setSelectedMainTags] = useState([]);
+  const [selectedDependentTags, setSelectedDependentTags] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -26,16 +28,90 @@ const CreateRecipe = (props) => {
   ];
 
   const tags = [
-    "soup",
-    "breakfast",
-    "main dishes",
-    "side dish",
-    "salads",
-    "appetizers",
-    "bakery",
-    "desserts",
-    "other",
+    "Soup",
+    "Breakfast",
+    "Main",
+    "Side",
+    "Salad",
+    "Appetizers",
+    "Bakery",
+    "Desserts",
+    "Other",
   ];
+
+  const tagsWithDependencies = {
+    Breakfast: [
+      "Toast",
+      "Sandwich",
+      "Eggs",
+      "Overnight oats",
+      "Crepes and pancakes",
+      "Porridge",
+      "Muesli & granola",
+      "Waffles",
+      "Other",
+    ],
+    Soup: [
+      "Meat soup",
+      "Vegetable soup",
+      "Fish and seafood soup",
+      "Noodle soup",
+      "Cold soup",
+      "Cream soup",
+      "Other",
+    ],
+    Main: [
+      "Meat main dishes",
+      "Seafood main dishes",
+      "Quiche",
+      "Vegetable main dishes",
+      "Pizza",
+      "Burger",
+      "Pasta",
+      "Other",
+    ],
+    Side: [
+      "Potato side dish recipe",
+      "Rice side dish recipe",
+      "Vegetable side dish recipe",
+      "Sauces and condiments",
+      "Other",
+    ],
+    Salad: [
+      "Greek salad",
+      "Tuna salad",
+      "Vegetable salad",
+      "Meat salad",
+      "Egg salad",
+      "Grain salad",
+      "Salad dressing",
+      "Other",
+    ],
+    Appetizers: [
+      "Canapes and crostini",
+      "Bruschetta",
+      "Meat and poultry appetizer",
+      "Baked brie",
+      "Stuffed mushroom",
+      "Other",
+    ],
+    Desserts: [
+      "Cheesecake",
+      "Cobbler",
+      "Crisps and crumbles",
+      "Custards and puddings",
+      "Pie",
+      "Cake",
+      "Cupcakes",
+      "Frozen",
+      "Brownie",
+      "Cookies",
+      "Candy& chocolate",
+      "Dessert filling",
+      "Mousse",
+      "Other",
+    ],
+  };
 
   const handleAddIngredient = () => {
     setIngredients((prevIngredients) => [
@@ -43,11 +119,20 @@ const CreateRecipe = (props) => {
       { name: "", quantity: "", measurement: "" },
     ]);
   };
+
   const handleAddInstructions = () => {
     setInstructions((prevInstructions) => [
       ...prevInstructions,
       `Step ${prevInstructions.length + 1}: `,
     ]);
+  };
+
+  const handleMainTagsChange = (event, newValue) => {
+    setSelectedMainTags(newValue);
+  };
+
+  const handleDependentTagsChange = (event, newValue) => {
+    setSelectedDependentTags(newValue);
   };
 
   const handleCreateRecipe = async () => {
@@ -64,7 +149,7 @@ const CreateRecipe = (props) => {
       ),
       instuctions: formattedInstructions,
       author: user.toLowerCase(),
-      tags: selectedTags,
+      tags: [...selectedMainTags, ...selectedDependentTags],
     };
 
     console.log(recipe);
@@ -211,7 +296,6 @@ const CreateRecipe = (props) => {
                 id={`instruction-${index}`}
                 label={`Step ${index + 1}`}
                 variant="outlined"
-                // value={instruction}
                 onChange={(e) => {
                   const updatedInstructions = [...instructions];
                   updatedInstructions[index] = `Step ${index + 1}: ${
@@ -228,13 +312,33 @@ const CreateRecipe = (props) => {
           </Button>
           <Autocomplete
             multiple
-            id="tags"
+            id="main-tags"
             options={tags}
-            isOptionEqualToValue={(option, value) => option === value}
-            value={selectedTags}
-            onChange={(event, newValue) => setSelectedTags(newValue)}
+            value={selectedMainTags}
+            onChange={handleMainTagsChange}
             renderInput={(params) => (
-              <TextField {...params} label="Tags" placeholder="Select Tags" />
+              <TextField
+                {...params}
+                label="Main Tags"
+                placeholder="Select Tags"
+              />
+            )}
+          />
+          <Autocomplete
+            multiple
+            id="dependent-tags"
+            options={selectedMainTags.reduce(
+              (acc, tag) => [...acc, ...(tagsWithDependencies[tag] || [])],
+              []
+            )}
+            value={selectedDependentTags}
+            onChange={handleDependentTagsChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Additional Tags"
+                placeholder="Select Tags"
+              />
             )}
           />
           <Button variant="contained" onClick={handleCreateRecipe}>
