@@ -1,4 +1,9 @@
-import { login, register } from "../models/usersModel.js";
+import {
+  addToFavorites,
+  getFavorites,
+  login,
+  register,
+} from "../models/usersModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -48,5 +53,30 @@ export const _register = async (req, res) => {
   } catch (e) {
     console.log("_register=>", e);
     res.status(404).json({ msg: "username allready exist" });
+  }
+};
+
+export const _addToFavorites = async (req, res) => {
+  const userId = req.params.userId;
+  const recipeId = req.body.recipeId;
+
+  try {
+    const favoriteRecipes = await addToFavorites(userId, recipeId);
+    res.status(200).json({ favoriteRecipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const _getFavorites = async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const favoriteRecipes = await getFavorites(userId);
+    res.status(200).json({ favoriteRecipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
